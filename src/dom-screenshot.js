@@ -3,9 +3,9 @@
 
     function copyCSS(source, target) {
 	var cs = window.getComputedStyle(source);
-        for (var key in cs) {
-            if(typeof key === "string" && typeof cs[key] === "string" && !(/^(cssText|parentRule)$/).test(key)) {
-                target.style[key] = cs[key];
+        for (var prop in cs) {
+            if(isNaN(parseInt(prop, 10)) && typeof cs[prop] === "string" && !(/^(cssText|parentRule)$/).test(prop)) {
+                target.style[prop] = cs[prop];
             }
         }
     }
@@ -46,8 +46,11 @@
             });
         }
     } else {
-        window.domScreenshot = DomScreenshot;
+        window.DomScreenshot = DomScreenshot;
     }
 
 })();
 
+
+var dataURI = (new DomScreenshot(document.body)).toDataURI();
+console.log(dataURI);
