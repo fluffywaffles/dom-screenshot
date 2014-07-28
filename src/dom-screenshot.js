@@ -1,26 +1,13 @@
 (function() {
     "use strict";
 
-    var supportsCSSText = getComputedStyle(document.body).cssText !== "";
-
-    function copyCSS(elem, origElem, log) {
-
-	var computedStyle = getComputedStyle(origElem);
-
-	if(supportsCSSText) {
-	    elem.style.cssText = computedStyle.cssText;
-
-	} else {
-
-	    // Really, Firefox?
-	    for(var prop in computedStyle) {
-		if(isNaN(parseInt(prop, 10)) && typeof computedStyle[prop] !== 'function' && !(/^(cssText|length|parentRule)$/).test(prop)) {
-		    elem.style[prop] = computedStyle[prop];
-		}
-	    }
-
-	}
-
+    function copyCSS(source, target) {
+	var cs = window.getComputedStyle(source);
+        for (var key in cs) {
+            if(typeof key === "string" && typeof cs[key] == "string" && !(/^(cssText|parentRule)$/).test(key)) {
+                target.style[key] = cs[key];
+            }
+        }
     }
 
     function inlineStyles(elem, origElem) {
