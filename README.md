@@ -6,7 +6,7 @@ So I forked it.
 
 ## Usage
 
-```
+```javascript
 var dataURI = (new DomScreenshot(document.body)).toDataURI();
 console.log(dataURI);
 ```
@@ -17,7 +17,11 @@ console.log(dataURI);
 
     See also: https://github.com/pbakaus/domvas/pull/6
 
-- New API: domScreenshot.toDataURI()
+- Add API: domScreenshot.toDataURI()
+
+- Remove API: toImage()
+
+- It's OOP.
 
 - Kissy Support
 
