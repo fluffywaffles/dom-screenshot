@@ -8,9 +8,13 @@ So I forked it.
 
 - `"use strict";` statement transferred into the anonymous function's body
 
-    https://github.com/pbakaus/domvas/pull/6
+    See also: https://github.com/pbakaus/domvas/pull/6
 
 - New API: domScreenshot.toDataURI()
+
+- Kissy Support
+
+- uData package compatibility
 
 ## Note
 

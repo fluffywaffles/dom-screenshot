@@ -41,7 +41,7 @@
 
     }
 
-    window.domScreenshot = {
+    var domScreenshot = {
 
         toDataURI: function(origElem, width, height, left, top) {
 	    left = (left || 0);
@@ -86,6 +86,20 @@
 	}
 
     };
+
+    if(typeof KISSY !== "undefined") {
+        if(typeof require !== "undefined") {
+            // udata package
+            module.exports = domScreenshot;
+        } else {
+            // kissy package
+            KISSY.add(function(S, require, exports, module) {
+                module.exports = domScreenshot;
+            });
+        }
+    } else {
+        window.domScreenshot = domScreenshot;
+    }
 
 })();
 
