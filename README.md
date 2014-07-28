@@ -12,7 +12,13 @@ So I forked it.
 
 - New API: domScreenshot.toDataURI()
 
-# Domvas's README
+## Note
+
+- IE 9 / 10 / 11 was not supported. (as it doesn't support the foreignObject tag in SVG)
+
+    See also http://msdn.microsoft.com/en-us/library/hh834675%28v=vs.85%29.aspx
+
+# Domvas
 
 ## Overview
 
