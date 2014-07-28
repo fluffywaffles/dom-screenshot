@@ -1,4 +1,18 @@
-# Domvas
+# dom-screenshot
+
+This is a forked version of domvas.
+Seemes that the original repo was no longer maintained.
+So I forked it.
+
+## Difference form domvas
+
+- `"use strict";` statement transferred into the anonymous function's body
+
+    https://github.com/pbakaus/domvas/pull/6
+
+- New API: domScreenshot.toDataURI()
+
+# Domvas's README
 
 ## Overview
 

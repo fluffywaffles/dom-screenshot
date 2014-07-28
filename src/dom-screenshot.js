@@ -41,10 +41,9 @@
 
     }
 
-    window.domvas = {
+    window.domScreenshot = {
 
-	toImage: function(origElem, callback, width, height, left, top) {
-
+        toDataURI: function(origElem, width, height, left, top) {
 	    left = (left || 0);
 	    top = (top || 0);
 
@@ -66,6 +65,12 @@
 		    serialized +
 		    "</foreignObject>" +
 		    "</svg>";
+
+        },
+
+	toImage: function(origElem, callback, width, height, left, top) {
+
+            var dataUri = this.toDataURI(origElem, width, height, left, top);
 
 	    // create new, actual image
 	    var img = new Image();
