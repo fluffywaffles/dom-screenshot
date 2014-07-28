@@ -4,88 +4,49 @@
     function copyCSS(source, target) {
 	var cs = window.getComputedStyle(source);
         for (var key in cs) {
-            if(typeof key === "string" && typeof cs[key] == "string" && !(/^(cssText|parentRule)$/).test(key)) {
+            if(typeof key === "string" && typeof cs[key] === "string" && !(/^(cssText|parentRule)$/).test(key)) {
                 target.style[key] = cs[key];
             }
         }
     }
 
-    function inlineStyles(elem, origElem) {
+    function DomScreenshot(sourceNode) {
+        var node = sourceNode.cloneNode(true),
+            children = node.querySelectorAll('*'),
+            sourceChildren = sourceNode.querySelectorAll('*');
 
-	var children = elem.querySelectorAll('*');
-	var origChildren = origElem.querySelectorAll('*');
+        copyCSS(sourceNode, node);
 
-	// copy the current style to the clone
-	copyCSS(elem, origElem, 1);
+        // reset root's margin
+        ["margin", "marginLeft", "marginTop", "marginBottom", "marginRight"].forEach(function(k) {
+            node.style[k] = '';
+        });
 
-	// collect all nodes within the element, copy the current style to the clone
-	Array.prototype.forEach.call(children, function(child, i) {
-	    copyCSS(child, origChildren[i]);
-	});
+        for(var i = 0; i < children.length; i++) {
+            copyCSS(sourceChildren[i], children[i]);
+        }
 
-	// strip margins from the outer element
-	elem.style.margin = elem.style.marginLeft = elem.style.marginTop = elem.style.marginBottom = elem.style.marginRight = '';
-
+        node.setAttribute("xmlns", "http://www.w3.org/1999/xhtml"); // SVG can only eat well formed XHTML
+        var xml = new XMLSerializer().serializeToString(node);
+        this.dataURI = "data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' width='" + node.offsetWidth + "' height='" + node.offsetHeight + "'><foreignObject width='100%' height='100%' x='0' y='0'>" + xml + "</foreignObject></svg>";
     }
 
-    var domScreenshot = {
-
-        toDataURI: function(origElem, width, height, left, top) {
-	    left = (left || 0);
-	    top = (top || 0);
-
-	    var elem = origElem.cloneNode(true);
-
-	    // inline all CSS (ugh..)
-	    inlineStyles(elem, origElem);
-
-	    // unfortunately, SVG can only eat well formed XHTML
-	    elem.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
-
-	    // serialize the DOM node to a String
-	    var serialized = new XMLSerializer().serializeToString(elem);
-
-	    // Create well formed data URL with our DOM string wrapped in SVG
-	    var dataUri = "data:image/svg+xml," +
-		    "<svg xmlns='http://www.w3.org/2000/svg' width='" + ((width || origElem.offsetWidth) + left) + "' height='" + ((height || origElem.offsetHeight) + top) + "'>" +
-		    "<foreignObject width='100%' height='100%' x='" + left + "' y='" + top + "'>" +
-		    serialized +
-		    "</foreignObject>" +
-		    "</svg>";
-
-        },
-
-	toImage: function(origElem, callback, width, height, left, top) {
-
-            var dataUri = this.toDataURI(origElem, width, height, left, top);
-
-	    // create new, actual image
-	    var img = new Image();
-	    img.src = dataUri;
-
-	    // when loaded, fire onload callback with actual image node
-	    img.onload = function() {
-		if(callback) {
-		    callback.call(this, this);
-		}
-	    };
-
-	}
-
-    };
+    DomScreenshot.prototype.toDataURI = function() {
+        return this.dataURI;
+    }
 
     if(typeof KISSY !== "undefined") {
         if(typeof require !== "undefined") {
             // udata package
-            module.exports = domScreenshot;
+            module.exports = DomScreenshot;
         } else {
             // kissy package
             KISSY.add(function(S, require, exports, module) {
-                module.exports = domScreenshot;
+                module.exports = DomScreenshot;
             });
         }
     } else {
-        window.domScreenshot = domScreenshot;
+        window.domScreenshot = DomScreenshot;
     }
 
 })();

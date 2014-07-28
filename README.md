@@ -4,6 +4,13 @@ This is a forked version of domvas.
 Seemes that the original repo was no longer maintained.
 So I forked it.
 
+## Usage
+
+```
+var dataURI = (new DomScreenshot(document.body)).toDataURI();
+console.log(dataURI);
+```
+
 ## Difference form domvas
 
 - `"use strict";` statement transferred into the anonymous function's body
