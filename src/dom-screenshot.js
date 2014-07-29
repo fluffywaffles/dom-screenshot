@@ -2,6 +2,10 @@
     "use strict";
 
     function copyCSS(source, target) {
+        var ignore = ["g", "defs", "animate"];
+        if(ignore.indexOf(source.tagName) > -1) {
+            return;
+        }
         // Note: get cs.cssText does not work in firefox
 	var cs = window.getComputedStyle(source),
             cssText = '';
@@ -17,25 +21,29 @@
      * @constructor
      */
     function DomScreenshot(sourceNode) {
+        
         var node = sourceNode.cloneNode(true),
-            children = node.querySelectorAll('*:not(script)'),
-            sourceChildren = sourceNode.querySelectorAll('*:not(script)');
+            children = node.querySelectorAll('*'),
+            sourceChildren = sourceNode.querySelectorAll('*');
 
-        var scripts = node.querySelectorAll('script');
-        for(var i = 0; i < scripts.length; i++) {
-            scripts[i].remove();
+        var i;
+        for(i = 0; i < children.length; i++) {
+            copyCSS(sourceChildren[i], children[i]);
         }
 
-        copyCSS(sourceNode, node);
+        var ignore = node.querySelectorAll('script');
+        for(i = 0; i < ignore.length; i++) {
+            ignore[i].remove();
+        }
 
+        
+
+        copyCSS(sourceNode, node);
         // reset root's margin
         ["margin", "marginLeft", "marginTop", "marginBottom", "marginRight"].forEach(function(k) {
             node.style[k] = '';
         });
 
-        for(var j = 0; j < children.length; j++) {
-            copyCSS(sourceChildren[j], children[j]);
-        }
 
         node.setAttribute("xmlns", "http://www.w3.org/1999/xhtml"); // SVG can only eat well formed XHTML
         var xml = new XMLSerializer().serializeToString(node);

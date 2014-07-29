@@ -35,6 +35,10 @@ console.log(dataURI);
 
 - UTF-8 Support
 
+- No longer copy css to `<g>, <defs>, <animate>` to avoid issues when parsing generated SVG.
+
+    See also: https://github.com/zenozeng/dom-screenshot/issues/5
+
 ## Note
 
 - IE 9 / 10 / 11 was not supported. (as it doesn't support the foreignObject tag in SVG)
