@@ -21,8 +21,6 @@ console.log(dataURI);
 
 - Remove API: toImage()
 
-- It's OOP.
-
 - copyCSS: use for loop to dump computed styles and cssText to set
 
     See also: https://developer.mozilla.org/en-US/docs/Web/API/Window.getComputedStyle
