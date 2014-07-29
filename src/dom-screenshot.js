@@ -1,13 +1,17 @@
+// maybe using setInterval?
+
 (function() {
     "use strict";
 
     function copyCSS(source, target) {
-	var cs = window.getComputedStyle(source);
-        for (var prop in cs) {
-            if(isNaN(parseInt(prop, 10)) && typeof cs[prop] === "string" && !(/^(cssText|parentRule)$/).test(prop)) {
-                target.style[prop] = cs[prop];
-            }
+        // Note: get cs.cssText does not work in firefox
+	var cs = window.getComputedStyle(source),
+            cssText = '';
+        for(var i = 0; i < cs.length; i++) {
+            var style = cs[i];
+            cssText += style + ':' + cs.getPropertyValue(style) + ';';
         }
+        target.style.cssText = cssText;
     }
 
     function DomScreenshot(sourceNode) {
@@ -28,11 +32,20 @@
 
         node.setAttribute("xmlns", "http://www.w3.org/1999/xhtml"); // SVG can only eat well formed XHTML
         var xml = new XMLSerializer().serializeToString(node);
-        this.dataURI = "data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' width='" + node.offsetWidth + "' height='" + node.offsetHeight + "'><foreignObject width='100%' height='100%' x='0' y='0'>" + xml + "</foreignObject></svg>";
+        var width = sourceNode.offsetWidth,
+            height = sourceNode.offsetHeight;
+        console.log([width, height]);
+        this.svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'><foreignObject width='100%' height='100%' x='0' y='0'>" + xml + "</foreignObject></svg>";
     }
 
+    /**
+     * Convert to Base64 Data URI
+     *
+     * @method enableTooltip
+     * @private
+     */
     DomScreenshot.prototype.toDataURI = function() {
-        return this.dataURI;
+        return "data:image/svg+xml;base64," + window.btoa(this.svg);
     }
 
     if(typeof KISSY !== "undefined") {
@@ -48,9 +61,4 @@
     } else {
         window.DomScreenshot = DomScreenshot;
     }
-
 })();
-
-
-var dataURI = (new DomScreenshot(document.body)).toDataURI();
-console.log(dataURI);

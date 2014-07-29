@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Domvas!</title>
+
+	<style type="text/css">
+
+	 #dom {
+	     font-family: Arial;
+	     border: 5px solid rgba(0,0,0,0.2);
+	     border-radius: 10px;
+	     width: 260px;
+	     padding: 5px 20px;
+	     background: #4f8eff;
+
+	     text-shadow: 1px 1px 0 #264782;
+	     line-height: 1.4em;
+
+	     margin: 20px;
+	 }
+
+	 #dom p {
+	     color: rgba(255,255,255,0.8);
+	 }
+
+	 #dom strong {
+	     color: #fff;
+	     font-style: italic;
+	 }
+
+	</style>
+    </head>
+    <body>
+
+	<section>
+
+	    <h1>Demo</h1>
+
+	    <div class="sub">
+
+		<div style='font-size:30px' id="dom">
+		    <p>EHRMAGERD <strong>DOM IN CANVAS</strong>!</p>
+		</div>
+
+		<canvas id="test" width="350" height="206"></canvas>
+
+	    </div>
+
+	</section>
+
+	<script src="../src/dom-screenshot.js"></script>
+	<script>
+
+         var dataURI = new DomScreenshot(document.body).toDataURI();
+         console.log(dataURI);
+
+	</script>
+
+    </body>
+</html>

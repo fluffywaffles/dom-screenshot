@@ -27,6 +27,12 @@ console.log(dataURI);
 
 - uData package compatibility
 
+- copyCSS: use for loop to dump computed styles and cssText to set
+
+    See also: https://developer.mozilla.org/en-US/docs/Web/API/Window.getComputedStyle
+
+- DataURI now in base64
+
 ## Note
 
 - IE 9 / 10 / 11 was not supported. (as it doesn't support the foreignObject tag in SVG)
