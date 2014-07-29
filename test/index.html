@@ -3,10 +3,7 @@
     <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Domvas!</title>
-
 	<style type="text/css">
-
 	 #dom {
 	     font-family: Arial;
 	     border: 5px solid rgba(0,0,0,0.2);
@@ -29,34 +26,32 @@
 	     color: #fff;
 	     font-style: italic;
 	 }
-
 	</style>
     </head>
     <body>
-
 	<section>
-
 	    <h1>Demo</h1>
-
 	    <div class="sub">
-
 		<div style='font-size:30px' id="dom">
-		    <p>EHRMAGERD <strong>DOM IN CANVAS</strong>!</p>
+		    <p>This <strong>is a test</strong>!</p>
 		</div>
-
-		<canvas id="test" width="350" height="206"></canvas>
-
 	    </div>
-
 	</section>
-
 	<script src="../src/dom-screenshot.js"></script>
 	<script>
-
          var dataURI = new DomScreenshot(document.body).toDataURI();
-         console.log(dataURI);
+         var a = document.createElement('a');
+         a.href = dataURI;
+         a.innerText = "Open Screenshot";
+         document.body.appendChild(a);
 
+         var br = document.createElement('br');
+         document.body.appendChild(br);
+
+         a = a.cloneNode(true);
+         a.innerText = "Download Screenshot";
+         a.setAttribute('download', 'screenshot.svg');
+         document.body.appendChild(a);
 	</script>
-
     </body>
 </html>

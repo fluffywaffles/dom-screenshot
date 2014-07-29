@@ -33,6 +33,8 @@ console.log(dataURI);
 
 - DataURI now in base64
 
+- Ignore `<script>` in target
+
 ## Note
 
 - IE 9 / 10 / 11 was not supported. (as it doesn't support the foreignObject tag in SVG)

@@ -18,8 +18,13 @@
      */
     function DomScreenshot(sourceNode) {
         var node = sourceNode.cloneNode(true),
-            children = node.querySelectorAll('*'),
-            sourceChildren = sourceNode.querySelectorAll('*');
+            children = node.querySelectorAll('*:not(script)'),
+            sourceChildren = sourceNode.querySelectorAll('*:not(script)');
+
+        var scripts = node.querySelectorAll('script');
+        for(var i = 0; i < scripts.length; i++) {
+            scripts[i].remove();
+        }
 
         copyCSS(sourceNode, node);
 
@@ -28,8 +33,8 @@
             node.style[k] = '';
         });
 
-        for(var i = 0; i < children.length; i++) {
-            copyCSS(sourceChildren[i], children[i]);
+        for(var j = 0; j < children.length; j++) {
+            copyCSS(sourceChildren[j], children[j]);
         }
 
         node.setAttribute("xmlns", "http://www.w3.org/1999/xhtml"); // SVG can only eat well formed XHTML
@@ -45,7 +50,7 @@
      * @method toDataURI
      */
     DomScreenshot.prototype.toDataURI = function() {
-        return "data:image/svg+xml;base64," + window.btoa(this.svg);
+        return "data:image/svg+xml;base64," +  window.btoa(unescape(encodeURIComponent(this.svg)));
     }
 
     if(typeof KISSY !== "undefined") {
