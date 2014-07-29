@@ -31,12 +31,13 @@
             copyCSS(sourceChildren[i], children[i]);
         }
 
-        var ignore = node.querySelectorAll('script');
-        for(i = 0; i < ignore.length; i++) {
-            ignore[i].remove();
+        for(i = 0; i < children.length; i++) {
+            var child = children[i];
+            if(child.tagName === "SCRIPT" ||
+               child.style.display === "none") {
+                child.remove();
+            }
         }
-
-        
 
         copyCSS(sourceNode, node);
         // reset root's margin

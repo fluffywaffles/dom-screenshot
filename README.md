@@ -35,6 +35,8 @@ console.log(dataURI);
 
     See also: https://github.com/zenozeng/dom-screenshot/issues/5
 
+- Ignore invisiable elements (style.display is none)
+
 ## Note
 
 - IE 9 / 10 / 11 was not supported. (as it doesn't support the foreignObject tag in SVG)
