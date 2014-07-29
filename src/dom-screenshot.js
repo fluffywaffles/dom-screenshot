@@ -61,11 +61,6 @@
         return "data:image/svg+xml;charset=utf-8;base64," +  window.btoa(unescape(encodeURIComponent(this.svg)));
     }
 
-    if(typeof KISSY !== "undefined" && typeof require !== "undefined") {
-        // udata package
-        module.exports = DomScreenshot;
-    } else {
-        window.DomScreenshot = DomScreenshot;
-    }
+    window.DomScreenshot = DomScreenshot;
 
 })();
