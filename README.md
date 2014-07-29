@@ -33,6 +33,8 @@ console.log(dataURI);
 
 - Ignore `<script>` in target
 
+- UTF-8 Support
+
 ## Note
 
 - IE 9 / 10 / 11 was not supported. (as it doesn't support the foreignObject tag in SVG)

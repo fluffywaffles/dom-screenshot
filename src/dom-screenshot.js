@@ -41,7 +41,7 @@
         var xml = new XMLSerializer().serializeToString(node);
         var width = sourceNode.offsetWidth,
             height = sourceNode.offsetHeight;
-        this.svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'><foreignObject width='100%' height='100%' x='0' y='0'>" + xml + "</foreignObject></svg>";
+        this.svg = "<?xml version='1.0' encoding='UTF-8' ?><svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'><foreignObject width='100%' height='100%' x='0' y='0'>" + xml + "</foreignObject></svg>";
     }
 
     /**
@@ -50,7 +50,7 @@
      * @method toDataURI
      */
     DomScreenshot.prototype.toDataURI = function() {
-        return "data:image/svg+xml;base64," +  window.btoa(unescape(encodeURIComponent(this.svg)));
+        return "data:image/svg+xml;charset=utf-8;base64," +  window.btoa(unescape(encodeURIComponent(this.svg)));
     }
 
     if(typeof KISSY !== "undefined" && typeof require !== "undefined") {
