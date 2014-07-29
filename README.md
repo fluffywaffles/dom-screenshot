@@ -11,7 +11,7 @@ var dataURI = (new DomScreenshot(document.body)).toDataURI();
 console.log(dataURI);
 ```
 
-## Difference form domvas
+## ChangeLog (since forked form domvas)
 
 - `"use strict";` statement transferred into the anonymous function's body
 
