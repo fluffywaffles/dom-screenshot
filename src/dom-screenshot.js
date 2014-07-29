@@ -1,5 +1,3 @@
-// maybe using setInterval?
-
 (function() {
     "use strict";
 
@@ -14,6 +12,10 @@
         target.style.cssText = cssText;
     }
 
+    /**
+     * @class DomScreenshot
+     * @constructor
+     */
     function DomScreenshot(sourceNode) {
         var node = sourceNode.cloneNode(true),
             children = node.querySelectorAll('*'),
@@ -34,15 +36,13 @@
         var xml = new XMLSerializer().serializeToString(node);
         var width = sourceNode.offsetWidth,
             height = sourceNode.offsetHeight;
-        console.log([width, height]);
         this.svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "'><foreignObject width='100%' height='100%' x='0' y='0'>" + xml + "</foreignObject></svg>";
     }
 
     /**
      * Convert to Base64 Data URI
      *
-     * @method enableTooltip
-     * @private
+     * @method toDataURI
      */
     DomScreenshot.prototype.toDataURI = function() {
         return "data:image/svg+xml;base64," + window.btoa(this.svg);
