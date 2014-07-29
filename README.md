@@ -23,8 +23,6 @@ console.log(dataURI);
 
 - It's OOP.
 
-- Kissy Support
-
 - uData package compatibility
 
 - copyCSS: use for loop to dump computed styles and cssText to set

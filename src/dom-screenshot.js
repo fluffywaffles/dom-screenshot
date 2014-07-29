@@ -53,17 +53,11 @@
         return "data:image/svg+xml;base64," +  window.btoa(unescape(encodeURIComponent(this.svg)));
     }
 
-    if(typeof KISSY !== "undefined") {
-        if(typeof require !== "undefined") {
-            // udata package
-            module.exports = DomScreenshot;
-        } else {
-            // kissy package
-            KISSY.add(function(S, require, exports, module) {
-                module.exports = DomScreenshot;
-            });
-        }
+    if(typeof KISSY !== "undefined" && typeof require !== "undefined") {
+        // udata package
+        module.exports = DomScreenshot;
     } else {
         window.DomScreenshot = DomScreenshot;
     }
+
 })();
