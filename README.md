@@ -21,8 +21,6 @@ console.log(dataURI);
 
 - Remove API: toImage()
 
-- It's OOP.
-
 - uData package compatibility
 
 - copyCSS: use for loop to dump computed styles and cssText to set
