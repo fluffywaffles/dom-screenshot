@@ -37,7 +37,7 @@ console.log(dataURI);
 
 - Ignore invisiable elements (style.display is none)
 
-## Note
+## Known Issues
 
 - IE 9 / 10 / 11 was not supported. (as it doesn't support the foreignObject tag in SVG)
 
