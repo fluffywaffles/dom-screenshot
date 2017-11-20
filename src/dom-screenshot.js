@@ -21,7 +21,7 @@
      * @constructor
      */
     function DomScreenshot(sourceNode) {
-        
+
         var node = sourceNode.cloneNode(true),
             children = node.querySelectorAll('*'),
             sourceChildren = sourceNode.querySelectorAll('*');
